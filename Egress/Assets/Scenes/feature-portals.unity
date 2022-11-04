@@ -303,7 +303,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple Portal
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8680299442188065806, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
 --- !u!23 &319496041 stripped
 MeshRenderer:
@@ -531,15 +532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.54
+      value: 6.41
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.21
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.78
+      value: 4.74
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -575,6 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3743597651704331078, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
+    - {fileID: 8680299442188065806, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
 --- !u!1 &1388237598
 GameObject:
@@ -1052,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69440b038515cdc5ba405c0ba11a349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 0}
+  graphicsObject: {fileID: 1388237598}
   walkSpeed: 3
   runSpeed: 6
   smoothMoveTime: 0.1
