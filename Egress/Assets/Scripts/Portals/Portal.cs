@@ -291,10 +291,13 @@ public class Portal : MonoBehaviour {
         if (traveller) {
             OnTravellerEnterPortal (traveller);
 
-            // disable collision on wall when in portal
-            Debug.Log("DISABLE COLLISION on " + wall.name);
-            Collider c = wall.GetComponent<BoxCollider>();
-            c.isTrigger = true;
+            // don't disable collision if portal is disconnected
+            if (linkedPortal != null) {
+                // disable collision on wall when in portal
+                Debug.Log("DISABLE COLLISION on " + wall.name);
+                Collider c = wall.GetComponent<BoxCollider>();
+                c.isTrigger = true;
+            }
         }
     }
 

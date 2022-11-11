@@ -13,7 +13,7 @@ public class PortalGun : MonoBehaviour {
      * Link the two portals together
      * @param unlink - Optional param to unlink portals instead
      */
-    void LinkPortals(bool unlink = false) {
+    void LinkPortals(int unlink = -1) {
         Portal p = portals[0].GetComponent<Portal>();
         Portal y = portals[1].GetComponent<Portal>();
 
@@ -21,9 +21,17 @@ public class PortalGun : MonoBehaviour {
         y.linkedPortal = p;
 
         // give option to unlink portals
-        if (unlink) {
+        if (unlink > -1) {
             p.linkedPortal = null;
             y.linkedPortal = null;
+        }
+
+        if (unlink == 0) {
+            p.transform.position = new Vector3(100, 100, 100);
+        }
+
+        if (unlink == 1) {
+            y.transform.position = new Vector3(100, 100, 100);
         }
     }
 
@@ -64,6 +72,14 @@ public class PortalGun : MonoBehaviour {
         // yellow
         if (Input.GetMouseButtonDown(1)) {
             CreateProjectile(1);
+        }
+
+        if (Input.GetButtonDown("z")) {
+            LinkPortals(0);
+        }
+
+        if (Input.GetButtonDown("x")) {
+            LinkPortals(1);
         }
     }
 }
