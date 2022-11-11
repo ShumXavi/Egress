@@ -18,14 +18,17 @@ public class Projectile : MonoBehaviour {
 
     void OnCollisionEnter(Collision c) {
         if (c.gameObject.CompareTag("portable")) {
-            portal.transform.position = transform.position + c.gameObject.transform.forward;
+            portal.transform.position = transform.position;
             portal.transform.rotation = c.gameObject.transform.rotation;
-            Debug.Log(c.gameObject.transform.rotation[0]);
             portal.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
             if (type) {
                 portal.transform.Rotate(new Vector3(0, 180, 0), Space.World);
             }
             // portal.transform.Rotate(c.gameObject.transform.forward * 90, Space.World);
+
+            // Attach wall to portal
+            Portal p = portal.GetComponent<Portal>();
+            p.wall = c.gameObject;
         }
 
         Destroy(this.gameObject);

@@ -13,6 +13,8 @@ public class Portal : MonoBehaviour {
     public MeshRenderer screen;
     public int recursionLimit = 5;
 
+    public GameObject wall;
+
     [Header ("Advanced Settings")]
     public float nearClipOffset = 0.05f;
     public float nearClipLimit = 0.2f;
@@ -288,6 +290,11 @@ public class Portal : MonoBehaviour {
         var traveller = other.GetComponent<PortalTraveller> ();
         if (traveller) {
             OnTravellerEnterPortal (traveller);
+
+            // disable collision on wall when in portal
+            Debug.Log("DISABLE COLLISION on " + wall.name);
+            Collider c = wall.GetComponent<BoxCollider>();
+            c.isTrigger = true;
         }
     }
 
@@ -297,6 +304,11 @@ public class Portal : MonoBehaviour {
             traveller.ExitPortalThreshold ();
             trackedTravellers.Remove (traveller);
         }
+
+        // re-enable collision on wall when in portal
+        Debug.Log("ENABLE COLLISION on " + wall.name);
+        Collider c = wall.GetComponent<BoxCollider>();
+        c.isTrigger = false;
     }
 
     /*
