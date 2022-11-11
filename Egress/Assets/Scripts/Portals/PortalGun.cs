@@ -3,9 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PortalGun : MonoBehaviour {
-    public GameObject yellowAmmo;
-    public GameObject purpleAmmo;
+    public GameObject ammo;
+    public GameObject[] portals;
     public float force = 10f;
+
+    bool[] active = {false, false};
+
+    /**
+     * Link the two portals together
+     * @param unlink - Optional param to unlink portals instead
+     */
+    void LinkPortals(bool unlink = false) {
+        Portal p = portals[0].GetComponent<Portal>();
+        Portal y = portals[1].GetComponent<Portal>();
+
+        p.linkedPortal = y;
+        y.linkedPortal = p;
+
+        // give option to unlink portals
+        if (unlink) {
+            p.linkedPortal = null;
+            y.linkedPortal = null;
+        }
+    }
+
+    /**
+     * Create a projectile that will spawn a portal
+     * @param type - Which portal should be spawned. Integer, either 0 or 1
+     */
+    void CreateProjectile(int type) {
+        // instantiate slightly in front to bypass wall for now.
+        GameObject inst = Instantiate(ammo, transform.position + transform.forward * 2, transform.rotation);
+
+        // set type of ammo
+        Projectile p = inst.GetComponent<Projectile>();
+        p.portal = portals[type];
+        p.type = (type == 1);
+
+        Rigidbody prb = inst.GetComponent<Rigidbody>();
+        prb.AddRelativeForce(new Vector3(0, 0, force), ForceMode.Impulse);
+
+        if (active[(type + 1) % 2] && !active[type]) {
+            LinkPortals();
+        }
+        active[type] = true;
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -14,16 +56,14 @@ public class PortalGun : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // purple
         if (Input.GetMouseButtonDown(0)) {
-            GameObject inst = Instantiate(yellowAmmo, transform.position + transform.forward * 2, transform.rotation);
-            Rigidbody prb = inst.GetComponent<Rigidbody>();
-            prb.AddRelativeForce(new Vector3(0, 0, force), ForceMode.Impulse);
+            CreateProjectile(0);
         }
 
+        // yellow
         if (Input.GetMouseButtonDown(1)) {
-            GameObject inst = Instantiate(purpleAmmo, transform.position + transform.forward * 2, transform.rotation);
-            Rigidbody prb = inst.GetComponent<Rigidbody>();
-            prb.AddRelativeForce(new Vector3(0, 0, force), ForceMode.Impulse);
+            CreateProjectile(1);
         }
     }
 }

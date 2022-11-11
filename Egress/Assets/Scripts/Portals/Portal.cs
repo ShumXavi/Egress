@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour {
     [Header ("Main Settings")]
+    // leave blank! link when nessecary
     public Portal linkedPortal;
     public MeshRenderer screen;
     public int recursionLimit = 5;

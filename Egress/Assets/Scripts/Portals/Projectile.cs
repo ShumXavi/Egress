@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     public GameObject portal;
+    public bool type;
 
     // Start is called before the first frame update
     void Start() {
@@ -17,9 +18,13 @@ public class Projectile : MonoBehaviour {
 
     void OnCollisionEnter(Collision c) {
         if (c.gameObject.CompareTag("portable")) {
-            portal.transform.position = transform.position;
+            portal.transform.position = transform.position + c.gameObject.transform.forward;
             portal.transform.rotation = c.gameObject.transform.rotation;
+            Debug.Log(c.gameObject.transform.rotation[0]);
             portal.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+            if (type) {
+                portal.transform.Rotate(new Vector3(0, 180, 0), Space.World);
+            }
             // portal.transform.Rotate(c.gameObject.transform.forward * 90, Space.World);
         }
 
