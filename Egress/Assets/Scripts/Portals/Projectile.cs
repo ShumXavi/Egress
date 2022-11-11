@@ -18,9 +18,15 @@ public class Projectile : MonoBehaviour {
 
     void OnCollisionEnter(Collision c) {
         if (c.gameObject.CompareTag("portable")) {
-            portal.transform.position = transform.position;
+            // move portal to wall
+            // same position, move back by .2 to get it closer to wall
+            portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.2f);
+
+            // make portal vertical
             portal.transform.rotation = c.gameObject.transform.rotation;
             portal.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+
+            // if secondary portal, rotate 180 degrees, to have portals facing opposite directions
             if (type) {
                 portal.transform.Rotate(new Vector3(0, 180, 0), Space.World);
             }
