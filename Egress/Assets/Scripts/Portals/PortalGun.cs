@@ -28,10 +28,12 @@ public class PortalGun : MonoBehaviour {
 
         if (unlink == 0) {
             p.transform.position = new Vector3(100, 100, 100);
+            active[0] = false;
         }
 
         if (unlink == 1) {
             y.transform.position = new Vector3(100, 100, 100);
+            active[1] = false;
         }
     }
 
