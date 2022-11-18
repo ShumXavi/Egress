@@ -6,6 +6,7 @@ TagManager:
   tags:
   - portable
   - screen
+  - reflective
   layers:
   - Default
   - TransparentFX
