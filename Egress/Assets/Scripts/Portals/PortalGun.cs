@@ -74,11 +74,11 @@ public class PortalGun : MonoBehaviour {
             CreateProjectile(1);
         }
 
-        if (Input.GetButtonDown("z")) {
+        if (Input.GetKeyDown(KeyCode.Z)) {
             LinkPortals(0);
         }
 
-        if (Input.GetButtonDown("x")) {
+        if (Input.GetKeyDown(KeyCode.X)) {
             LinkPortals(1);
         }
     }
