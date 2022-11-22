@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    //look sensitivity
+    [Header("Camera Sensitivity")]
+    //look sensitivity I like 800
     public float sensX;
     public float sensY;
 
     //used for player orientation animations (make player face forward)
     public Transform orientation;
+
+    [Header("Pickup Settings")]
+    [SerializeField] Transform holdArea;
+    private GameObject heldObj;
+    private Rigidbody heldObjRB;
+
+    [Header("Physics Parameters")]
+    [SerializeField] private float pickupRange = 5.0f;
+
+    [SerializeField] private float pickupForce = 150.0f;
 
     float xRotation;
     float yRotation;
@@ -35,5 +46,59 @@ public class PlayerCam : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
+        // start pickup methods
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (heldObj == null)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                {
+                    //pickup object
+                    PickupObject(hit.transform.gameObject);
+                }
+            }
+            else
+            {
+                DropObject();
+            }
+        }
+        if (heldObj != null)
+        {
+            MoveObject();
+        }
+
+    }
+
+    void PickupObject(GameObject pickObj)
+    {
+        if (pickObj.GetComponent<Rigidbody>())
+        {
+            heldObjRB = pickObj.GetComponent<Rigidbody>();
+            heldObjRB.useGravity = false;
+            heldObjRB.drag = 10;
+            heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
+            heldObjRB.transform.parent = holdArea;
+            heldObj = pickObj;
+        }
+    }
+    void DropObject()
+    {
+
+        {
+            heldObjRB.useGravity = true;
+            heldObjRB.drag = 1;
+            heldObjRB.constraints = RigidbodyConstraints.None;
+            heldObjRB.transform.parent = null;
+            heldObj = null;
+        }
+    }
+    void MoveObject()
+    {
+        if (Vector3.Distance(heldObj.transform.position, holdArea.position) > 0.1f)
+        {
+            Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+            heldObjRB.AddForce(moveDirection * pickupForce);
+        }
     }
 }
