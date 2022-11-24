@@ -554,6 +554,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &814011318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814011319}
+  m_Layer: 0
+  m_Name: graphics_dummy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &814011319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814011318}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2556882, y: -3.4375725, z: 2.8290305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886542762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,11 +1387,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 133.704, y: 0, z: 0}
---- !u!1 &1691199197 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3f03b88d77a6d418889a0f38504ad179, type: 3}
-  m_PrefabInstance: {fileID: 529247883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1724476621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69440b038515cdc5ba405c0ba11a349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 1691199197}
+  graphicsObject: {fileID: 814011318}
   walkSpeed: 3
   runSpeed: 6
   smoothMoveTime: 0.1
