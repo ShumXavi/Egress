@@ -27,7 +27,8 @@ public class Projectile : MonoBehaviour {
         if (c.gameObject.CompareTag("portable")) {
             // move portal to wall
             // same position, move back by .2 to get it closer to wall
-            portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.2f);
+            // portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.2f);
+            portal.transform.position = transform.position;
 
             // make portal vertical
             portal.transform.rotation = c.gameObject.transform.rotation;
