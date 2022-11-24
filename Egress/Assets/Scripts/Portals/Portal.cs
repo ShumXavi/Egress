@@ -297,7 +297,8 @@ public class Portal : MonoBehaviour {
                 // disable collision on wall when in portal
                 Debug.Log("DISABLE COLLISION on " + wall.name);
                 Collider c = wall.GetComponent<BoxCollider>();
-                c.isTrigger = true;
+                Physics.IgnoreCollision(c, other, true);
+                // c.isTrigger = true;
             }
         }
     }
@@ -312,7 +313,8 @@ public class Portal : MonoBehaviour {
         // re-enable collision on wall when in portal
         Debug.Log("ENABLE COLLISION on " + wall.name);
         Collider c = wall.GetComponent<BoxCollider>();
-        c.isTrigger = false;
+        Physics.IgnoreCollision(c, other, false);
+        // c.isTrigger = false;
     }
 
     /*

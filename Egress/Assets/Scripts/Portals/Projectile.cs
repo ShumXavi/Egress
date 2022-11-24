@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour {
 
             // make portal vertical
             portal.transform.rotation = c.gameObject.transform.rotation;
-            // portal.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+            portal.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
 
             // if secondary portal, rotate 180 degrees, to have portals facing opposite directions
             if (type) {
