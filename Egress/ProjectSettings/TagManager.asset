@@ -7,6 +7,9 @@ TagManager:
   - portable
   - screen
   - reflective
+  - wall
+  - ceiling
+  - floor
   layers:
   - Default
   - TransparentFX
