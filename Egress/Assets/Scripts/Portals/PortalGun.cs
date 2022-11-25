@@ -48,6 +48,7 @@ public class PortalGun : MonoBehaviour {
         // set type of ammo
         Projectile p = inst.GetComponent<Projectile>();
         p.portal = portals[type];
+        p.otherPortal = portals[(type + 1) % 2];
         p.type = (type == 1);
 
         Rigidbody prb = inst.GetComponent<Rigidbody>();
