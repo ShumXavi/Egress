@@ -13,7 +13,7 @@ public class PlayerCam : MonoBehaviour
     public Transform orientation;
 
     [Header("Pickup Settings")]
-    [SerializeField] Transform holdArea;
+    [SerializeField] Transform PickupRange;
     private GameObject heldObj;
     private Rigidbody heldObjRB;
 
@@ -78,7 +78,7 @@ public class PlayerCam : MonoBehaviour
             heldObjRB.useGravity = false;
             heldObjRB.drag = 10;
             heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
-            heldObjRB.transform.parent = holdArea;
+            heldObjRB.transform.parent = PickupRange;
             heldObj = pickObj;
         }
     }
@@ -95,9 +95,9 @@ public class PlayerCam : MonoBehaviour
     }
     void MoveObject()
     {
-        if (Vector3.Distance(heldObj.transform.position, holdArea.position) > 0.1f)
+        if (Vector3.Distance(heldObj.transform.position, PickupRange.position) > 0.1f)
         {
-            Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+            Vector3 moveDirection = (PickupRange.position - heldObj.transform.position);
             heldObjRB.AddForce(moveDirection * pickupForce);
         }
     }

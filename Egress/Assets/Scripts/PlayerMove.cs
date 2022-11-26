@@ -25,7 +25,8 @@ public class PlayerMove : MonoBehaviour
 
     //pickup vars
     public bool CanPickup = false;
-
+    //Death bool
+    public static bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,7 @@ public class PlayerMove : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
         //gravity change player was too floaty
@@ -72,7 +73,7 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("I am the player I found the trigger1");
+        //Debug.Log("I am the player I found the trigger1");
         if (other.tag == "Kill")
         {
             isDead = true;
