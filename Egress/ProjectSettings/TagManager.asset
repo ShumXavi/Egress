@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - portable
+  - screen
+  - reflective
+  - wall
+  - ceiling
+  - floor
   layers:
   - Default
   - TransparentFX
