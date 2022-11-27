@@ -7,11 +7,74 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour {
 
     Portal[] portals;
+    [Header("Pickup Settings")]
+    [SerializeField] Transform PickupRange;
+    private GameObject heldObj;
+    private Rigidbody heldObjRB;
+
+    [Header("Physics Parameters")]
+    [SerializeField] private float pickupRange = 5.0f;
+
+    [SerializeField]
+    private float pickupForce = 150.0f;
 
     void Awake () {
         portals = FindObjectsOfType<Portal> ();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (heldObj == null)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                {
+                    //pickup object
+                    PickupObject(hit.transform.gameObject);
+                }
+            }
+            else
+            {
+                DropObject();
+            }
+        }
+        if (heldObj != null)
+        {
+            MoveObject();
+        }
+    }
+    void PickupObject(GameObject pickObj)
+    {
+        if (pickObj.GetComponent<Rigidbody>())
+        {
+            heldObjRB = pickObj.GetComponent<Rigidbody>();
+            heldObjRB.useGravity = false;
+            heldObjRB.drag = 10;
+            heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
+            heldObjRB.transform.parent = PickupRange;
+            heldObj = pickObj;
+        }
+    }
+    void DropObject()
+    {
 
+        {
+            heldObjRB.useGravity = true;
+            heldObjRB.drag = 1;
+            heldObjRB.constraints = RigidbodyConstraints.None;
+            heldObjRB.transform.parent = null;
+            heldObj = null;
+        }
+    }
+    void MoveObject()
+    {
+        if (Vector3.Distance(heldObj.transform.position, PickupRange.position) > 0.1f)
+        {
+            Vector3 moveDirection = (PickupRange.position - heldObj.transform.position);
+            heldObjRB.AddForce(moveDirection * pickupForce);
+        }
+    }
     void OnPreCull () {
 
         for (int i = 0; i < portals.Length; i++) {
