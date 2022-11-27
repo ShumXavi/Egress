@@ -28,7 +28,8 @@ public class MainCamera : MonoBehaviour {
             if (heldObj == null)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                //Added chack to see if object hit by raycast was a box to prevent player from picking up unintended objects ~ XS
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange) && hit.transform.CompareTag("Box"))
                 {
                     //pickup object
                     PickupObject(hit.transform.gameObject);

@@ -10,6 +10,7 @@ TagManager:
   - wall
   - ceiling
   - floor
+  - Box
   layers:
   - Default
   - TransparentFX
