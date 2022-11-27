@@ -34,6 +34,17 @@ public class FPSController : PortalTraveller {
     float lastGroundedTime;
     bool disabled;
 
+    [Header("Pickup Settings")]
+    [SerializeField] Transform PickupRange;
+    private GameObject heldObj;
+    private Rigidbody heldObjRB;
+
+    [Header("Physics Parameters")]
+    [SerializeField] private float pickupRange = 5.0f;
+
+    [SerializeField]
+    private float pickupForce = 150.0f;
+
     void Start () {
         cam = Camera.main;
         if (lockCursor) {
@@ -92,6 +103,27 @@ public class FPSController : PortalTraveller {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (heldObj == null)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                {
+                    //pickup object
+                    PickupObject(hit.transform.gameObject);
+                }
+            }
+            else
+            {
+                DropObject();
+            }
+        }
+        if (heldObj != null)
+        {
+            MoveObject();
+        }
+
         float mX = Input.GetAxisRaw ("Mouse X");
         float mY = Input.GetAxisRaw ("Mouse Y");
 
@@ -111,6 +143,37 @@ public class FPSController : PortalTraveller {
         transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
 
+    }
+    void PickupObject(GameObject pickObj)
+    {
+        if (pickObj.GetComponent<Rigidbody>())
+        {
+            heldObjRB = pickObj.GetComponent<Rigidbody>();
+            heldObjRB.useGravity = false;
+            heldObjRB.drag = 10;
+            heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
+            heldObjRB.transform.parent = PickupRange;
+            heldObj = pickObj;
+        }
+    }
+    void DropObject()
+    {
+
+        {
+            heldObjRB.useGravity = true;
+            heldObjRB.drag = 1;
+            heldObjRB.constraints = RigidbodyConstraints.None;
+            heldObjRB.transform.parent = null;
+            heldObj = null;
+        }
+    }
+    void MoveObject()
+    {
+        if (Vector3.Distance(heldObj.transform.position, PickupRange.position) > 0.1f)
+        {
+            Vector3 moveDirection = (PickupRange.position - heldObj.transform.position);
+            heldObjRB.AddForce(moveDirection * pickupForce);
+        }
     }
 
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
