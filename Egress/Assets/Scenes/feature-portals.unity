@@ -140,11 +140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.z
@@ -193,6 +193,10 @@ PrefabInstance:
     - target: {fileID: 3743597651704331074, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_Name
       value: Purple Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
+      propertyPath: m_Size.z
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_Center.y
@@ -960,7 +964,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699300016}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.3355913, y: -11.2, z: 12.42}
+  m_LocalPosition: {x: 4.3355913, y: -35.2, z: 10.9}
   m_LocalScale: {x: 10, y: 10, z: 0.46981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1029,7 +1033,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1127,6 +1131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 814011318}
   rb: {fileID: 0}
+  warpMultiplier: 1.5
+  held: 0
 --- !u!1 &1005875634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,11 +1244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_LocalScale.z
@@ -1291,6 +1297,10 @@ PrefabInstance:
     - target: {fileID: 3743597651704331074, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_Name
       value: Yellow Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
+      propertyPath: m_Size.z
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2, type: 3}
       propertyPath: m_Center.y
@@ -1881,9 +1891,10 @@ MonoBehaviour:
   smoothMoveTime: 0.1
   jumpForce: 8
   gravity: 18
+  warpMultiplier: 3
   lockCursor: 1
   mouseSensitivity: 10
-  pitchMinMax: {x: -90, y: 85}
+  pitchMinMax: {x: -90, y: 90}
   rotationSmoothTime: 0.1
   yaw: 0
   pitch: 0
@@ -1905,7 +1916,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.7, z: 0}
 --- !u!4 &1804610023
 Transform:
   m_ObjectHideFlags: 0

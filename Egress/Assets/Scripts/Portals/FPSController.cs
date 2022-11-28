@@ -9,6 +9,7 @@ public class FPSController : PortalTraveller {
     public float smoothMoveTime = 0.1f;
     public float jumpForce = 8;
     public float gravity = 18;
+    public float warpMultiplier = 2;
 
     public bool lockCursor;
     public float mouseSensitivity = 10;
@@ -144,7 +145,7 @@ public class FPSController : PortalTraveller {
         yaw += delta;
         smoothYaw += delta;
         transform.eulerAngles = Vector3.up * smoothYaw;
-        velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity));
+        velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity)) * warpMultiplier;
         Physics.SyncTransforms ();
     }
 
