@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8743005903727693125}
   - component: {fileID: 6373371806878525648}
   - component: {fileID: 7652425523883980912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortalShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,4 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portal: {fileID: 0}
+  otherPortal: {fileID: 0}
   type: 0
+  defaultLifetime: 5
