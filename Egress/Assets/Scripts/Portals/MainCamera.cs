@@ -49,6 +49,17 @@ public class MainCamera : MonoBehaviour {
     {
         if (pickObj.GetComponent<Rigidbody>())
         {
+            Debug.Log("Do RB thing");
+            if (pickObj.GetComponent<PortalPhysObject>())
+            {
+                Debug.Log("Do Phys thing");
+                PortalPhysObject phys = pickObj.GetComponent<PortalPhysObject>();
+                phys.held = true;
+            }
+            else
+            {
+                Debug.Log("Whoops");
+            }
             heldObjRB = pickObj.GetComponent<Rigidbody>();
             heldObjRB.useGravity = false;
             heldObjRB.drag = 10;
@@ -59,7 +70,12 @@ public class MainCamera : MonoBehaviour {
     }
     void DropObject()
     {
-
+        if (heldObj.GetComponent<PortalPhysObject>())
+        {
+            Debug.Log("Do Phys thing");
+            PortalPhysObject phys = heldObj.GetComponent<PortalPhysObject>();
+            phys.held = false;
+        }
         {
             heldObjRB.useGravity = true;
             heldObjRB.drag = 1;

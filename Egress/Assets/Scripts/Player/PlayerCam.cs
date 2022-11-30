@@ -74,11 +74,6 @@ public class PlayerCam : MonoBehaviour
     {
         if (pickObj.GetComponent<Rigidbody>())
         {
-            if (pickObj.GetComponent<PortalPhysObject>())
-            {
-                PortalPhysObject phys = heldObj.GetComponent<PortalPhysObject>();
-                phys.held = true;
-            }
             heldObjRB = pickObj.GetComponent<Rigidbody>();
             heldObjRB.useGravity = false;
             heldObjRB.drag = 10;
@@ -89,11 +84,6 @@ public class PlayerCam : MonoBehaviour
     }
     void DropObject()
     {
-        if (heldObj.GetComponent<PortalPhysObject>())
-        {
-            PortalPhysObject phys = heldObj.GetComponent<PortalPhysObject>();
-            phys.held = false;
-        }
 
         {
             heldObjRB.useGravity = true;

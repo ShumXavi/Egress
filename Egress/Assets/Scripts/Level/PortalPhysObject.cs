@@ -6,12 +6,20 @@ public class PortalPhysObject : PortalTraveller
 {
     public Rigidbody rb;
     public float warpMultiplier = 3;
+    public float gravity = 10;
     public bool held;
 
     void Awake()
     {
         held = false;
         rb = GetComponent<Rigidbody>();
+    }
+    void Update()
+    {
+        if (!held) {
+            rb.AddForce(new Vector3(0, -gravity * Time.deltaTime, 0), ForceMode.Impulse);
+        }
+        
     }
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
