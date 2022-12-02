@@ -16,11 +16,16 @@ public class PlayerCam : MonoBehaviour
     [SerializeField] Transform PickupRange;
     private GameObject heldObj;
     private Rigidbody heldObjRB;
+    //button bools
+    public static bool CButtOn;
+    public static bool GButtOn;
 
     [Header("Physics Parameters")]
     [SerializeField] private float pickupRange = 5.0f;
 
     [SerializeField] private float pickupForce = 150.0f;
+
+   
 
     float xRotation;
     float yRotation;
@@ -47,15 +52,30 @@ public class PlayerCam : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
         // start pickup methods
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldObj == null)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange) && hit.transform.tag == "Box")
                 {
                     //pickup object
                     PickupObject(hit.transform.gameObject);
+                }
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange) && hit.transform.tag == "Button")
+                {
+                    if(hit.collider.name == "GButton")
+                    {
+                        GButtOn = true;
+                        Debug.Log("Button is now " + GButtOn);
+                    }
+                    if (hit.collider.name == "CButton")
+                    {
+                        CButtOn = true;
+                        Debug.Log("Button is now " + CButtOn);
+                    }
+                    //hit.collider.gameObject.name
+                    //hit.collider.name
                 }
             }
             else

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//updated OnTriggerEnter method had needless bool in there
+
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,8 +25,7 @@ public class PlayerMove : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    //pickup vars
-    public bool CanPickup = false;
+   
     //Death bool
     public static bool isDead = false;
 
@@ -77,13 +78,9 @@ public class PlayerMove : MonoBehaviour
         if (other.tag == "Kill")
         {
             isDead = true;
-            Debug.Log("I am the player I found the trigger2");
+            //Debug.Log("I am the player I found the trigger2");
         }
-        if (other.tag == "Box")
-        {
-            CanPickup = true;
-
-        }
+      
     }
 
 }

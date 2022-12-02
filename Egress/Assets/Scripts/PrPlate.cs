@@ -19,17 +19,19 @@ public class PrPlate : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("I am the SOMETHING I found the trigger1");
-        if (collision.gameObject.tag == "Player")
+        //Debug.Log("I am the SOMETHING I found the trigger1");
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Box")
         {
             IsOn = true;
-            Debug.Log("I am the player I found the trigger2");
+            Debug.Log("I found the trigger2");
+            Debug.Log("Bool for PR " + IsOn);
         }
-        if (collision.gameObject.tag == "Box")
-        {
-
-            IsOn = true;
-            Debug.Log("I am the BOX I found the trigger3");
-        }
+            
+        
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        IsOn = false;
+        Debug.Log("Bool for PR " + IsOn);
     }
 }
