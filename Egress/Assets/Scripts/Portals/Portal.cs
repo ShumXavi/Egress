@@ -358,16 +358,25 @@ public class Portal : MonoBehaviour {
             this.gameObject.transform.Rotate(new Vector3(0, 180, 0), Space.World);
         }
 
+        if (!secondary && otherWallType == SurfaceTypes.FLOOR && wallType == SurfaceTypes.FLOOR)
+        {
+            this.gameObject.transform.Rotate(new Vector3(180, 0, 0), Space.World);
+        }
+        if (!secondary && wallType == SurfaceTypes.FLOOR && wallType == SurfaceTypes.FLOOR)
+        {
+            //this.gameObject.transform.Rotate(new Vector3(180, 0, 0), Space.World);
+        }
+
         if (wallType == otherWallType) return;
 
         // Fix rotation in special cases depending on the different wall types
 
         if (!secondary && otherWallType == SurfaceTypes.CEILING && wallType == SurfaceTypes.FLOOR) {
-            this.gameObject.transform.Rotate(new Vector3(180, 0, 0), Space.World);
+            this.gameObject.transform.Rotate(new Vector3(180, 180, 0), Space.World);
         }
 
         if (!secondary && wallType == SurfaceTypes.CEILING && otherWallType == SurfaceTypes.FLOOR) {
-            this.gameObject.transform.Rotate(new Vector3(180, 0, 0), Space.World);
+           this.gameObject.transform.Rotate(new Vector3(180, 180, 0), Space.World);
         }
 
         if (!secondary && wallType == SurfaceTypes.WALL && otherWallType == SurfaceTypes.FLOOR) {
@@ -377,6 +386,7 @@ public class Portal : MonoBehaviour {
         if (!secondary && wallType == SurfaceTypes.WALL && otherWallType == SurfaceTypes.CEILING) {
             this.gameObject.transform.Rotate(new Vector3(0, 180, 0), Space.World);
         }
+
 
     }
 }
