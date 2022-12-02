@@ -26,7 +26,8 @@ public class FPSController : PortalTraveller {
     float yawSmoothV;
     float pitchSmoothV;
     float verticalVelocity;
-    Vector3 velocity;
+    public Vector3 velocity;
+    public Vector3 warpVelocity;
     Vector3 smoothV;
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
@@ -38,6 +39,7 @@ public class FPSController : PortalTraveller {
     public bool CanPickup = false;
     //Death bool
     public static bool isDead = false;
+
 
     
 
@@ -79,10 +81,33 @@ public class FPSController : PortalTraveller {
 
         float currentSpeed = (Input.GetKey (KeyCode.LeftShift)) ? runSpeed : walkSpeed;
         Vector3 targetVelocity = worldInputDir * currentSpeed;
-        velocity = Vector3.SmoothDamp (velocity, targetVelocity, ref smoothV, smoothMoveTime);
-
+        if (warpVelocity.magnitude > 1)
+        {
+            velocity = warpVelocity;
+            warpVelocity = Vector3.SmoothDamp(warpVelocity, Vector3.zero, ref warpVelocity,smoothMoveTime);
+  
+            if (controller.isGrounded)
+            {
+                Debug.Log("Landed");
+                warpVelocity = Vector3.zero;
+            }
+        }
+        else
+        {
+            warpVelocity = Vector3.zero;
+            velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
+        }
         verticalVelocity -= gravity * Time.deltaTime;
-        velocity = new Vector3 (velocity.x, verticalVelocity, velocity.z);
+
+
+        velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
+
+        if (Input.GetKey(KeyCode.R)){
+            Debug.Log(velocity);
+        }
+
+
+
 
         var flags = controller.Move (velocity * Time.deltaTime);
         if (flags == CollisionFlags.Below) {
@@ -145,7 +170,14 @@ public class FPSController : PortalTraveller {
         yaw += delta;
         smoothYaw += delta;
         transform.eulerAngles = Vector3.up * smoothYaw;
-        velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity)) * warpMultiplier;
+        Debug.Log(toPortal.rotation);
+        Debug.Log(fromPortal.rotation);
+        warpVelocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity)) * warpMultiplier;
+        Debug.Log(velocity);
+        velocity = warpVelocity;
+        Debug.Log(warpVelocity);
+        verticalVelocity = warpVelocity.y;
+
         Physics.SyncTransforms ();
     }
 

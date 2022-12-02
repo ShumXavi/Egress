@@ -295,7 +295,7 @@ public class Portal : MonoBehaviour {
             // don't disable collision if portal is disconnected
             if (linkedPortal != null) {
                 // disable collision on wall when in portal
-                Debug.Log("DISABLE COLLISION on " + wall.name);
+                //Debug.Log("DISABLE COLLISION on " + wall.name);
                 Collider c = wall.GetComponent<BoxCollider>();
                 Physics.IgnoreCollision(c, other, true);
                 // c.isTrigger = true;
@@ -311,7 +311,7 @@ public class Portal : MonoBehaviour {
         }
 
         // re-enable collision on wall when in portal
-        Debug.Log("ENABLE COLLISION on " + wall.name);
+        //Debug.Log("ENABLE COLLISION on " + wall.name);
         Collider c = wall.GetComponent<BoxCollider>();
         Physics.IgnoreCollision(c, other, false);
         // c.isTrigger = false;
