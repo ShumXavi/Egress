@@ -37,8 +37,10 @@ public class Projectile : MonoBehaviour {
 
             // move portal to wall
             // same position, move back by .2 to get it closer to wall
-            // portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.2f);
-            portal.transform.position = transform.position;
+            portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.1f);
+            //portal.transform.position = transform.position;
+
+            portalObject.adjustPosition();
 
             SurfaceTypes wallType = c.gameObject.GetComponent<SurfaceType>().type;
             SurfaceTypes otherWallType = otherPortalObject.wall != null

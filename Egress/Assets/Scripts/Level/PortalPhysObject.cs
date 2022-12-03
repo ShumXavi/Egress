@@ -6,7 +6,7 @@ public class PortalPhysObject : PortalTraveller
 {
     public Rigidbody rb;
     public float warpMultiplier = 3;
-    public float gravity = 10;
+    public float gravity = 18;
     public bool held;
 
     void Awake()
@@ -24,8 +24,12 @@ public class PortalPhysObject : PortalTraveller
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
-        base.Teleport(fromPortal, toPortal, pos, rot);
-        rb.velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rb.velocity)) * warpMultiplier;
-        rb.angularVelocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rb.angularVelocity)) *warpMultiplier;
+        if (!held)
+        {
+            base.Teleport(fromPortal, toPortal, pos, rot);
+            rb.velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rb.velocity)) * warpMultiplier;
+            rb.angularVelocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rb.angularVelocity)) * warpMultiplier;
+        }
+
     }
 }

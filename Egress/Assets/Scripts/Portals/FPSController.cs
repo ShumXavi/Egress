@@ -9,8 +9,8 @@ public class FPSController : PortalTraveller {
     public float smoothMoveTime = 0.1f;
     public float jumpForce = 8;
     public float gravity = 18;
-    public float verticalVelocityCap = 60;
-    public float warpMultiplier = 2;
+    public float verticalVelocityCap;
+    public float warpMultiplier = 1;
 
     public bool lockCursor;
     public float mouseSensitivity = 10;
@@ -41,7 +41,9 @@ public class FPSController : PortalTraveller {
     //Death bool
     public static bool isDead = false;
 
-
+    float pollingTime = 1f;
+    private float time;
+    private int frameCount;
     
 
     void Start () {
@@ -99,6 +101,17 @@ public class FPSController : PortalTraveller {
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
         }
         verticalVelocity -= gravity * Time.deltaTime;
+
+
+        time += Time.deltaTime;
+        frameCount++;
+
+        if (time >= pollingTime)
+        {
+            int frameRate = Mathf.RoundToInt(frameCount / time);
+            verticalVelocityCap = verticalVelocityCap % frameRate;
+        }
+
         if(Mathf.Abs(verticalVelocity) >= verticalVelocityCap)
         {
             verticalVelocity = verticalVelocityCap *(-verticalVelocity/verticalVelocity);

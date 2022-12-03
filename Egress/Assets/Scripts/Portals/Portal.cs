@@ -212,8 +212,8 @@ public class Portal : MonoBehaviour {
         Transform screenT = screen.transform;
         bool camFacingSameDirAsPortal = Vector3.Dot (transform.forward, transform.position - viewPoint) > 0;
         // TODO
-        // screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
-        // screenT.localPosition = Vector3.forward * screenThickness * ((camFacingSameDirAsPortal) ? 0.5f : -0.5f);
+        screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
+        screenT.localPosition = Vector3.forward * screenThickness * ((camFacingSameDirAsPortal) ? 0.5f : -0.5f);
         return screenThickness;
     }
 
@@ -388,5 +388,13 @@ public class Portal : MonoBehaviour {
         }
 
 
+    }
+
+    public void adjustPosition()
+    {
+        //Create 4 forward raycsts at each corner of portal
+        //If any of those raycasts hit an object which is not the surface the portal is partend to
+            //asjust poisiton towards the direction of most valid hits and check until valid
+        //If all raycasts are only hitting the parent object, that means the portal is not overlapping or on an edge, so it can be placed there
     }
 }
