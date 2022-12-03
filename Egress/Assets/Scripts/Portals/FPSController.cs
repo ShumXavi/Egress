@@ -186,7 +186,7 @@ public class FPSController : PortalTraveller {
         float delta = Mathf.DeltaAngle (smoothYaw, eulerRot.y);
         yaw += delta;
         smoothYaw += delta;
-        transform.eulerAngles = Vector3.up * smoothYaw;
+        //transform.eulerAngles = Vector3.up * smoothYaw;
         Debug.Log(toPortal.rotation);
         Debug.Log(fromPortal.rotation);
         warpVelocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity)) * warpMultiplier;

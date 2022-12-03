@@ -12,8 +12,11 @@ public class Portal : MonoBehaviour {
     public Portal linkedPortal;
     public MeshRenderer screen;
     public int recursionLimit = 5;
+    public Collider frame;
 
     public GameObject wall;
+
+    public GameObject[] vertBeans;
 
     [Header ("Advanced Settings")]
     public float nearClipOffset = 0.05f;
@@ -34,6 +37,7 @@ public class Portal : MonoBehaviour {
         trackedTravellers = new List<PortalTraveller> ();
         screenMeshFilter = screen.GetComponent<MeshFilter> ();
         screen.material.SetInt ("displayMask", 1);
+        frame  = GetComponentInChildren<BoxCollider>();
     }
 
     void LateUpdate () {
@@ -212,8 +216,8 @@ public class Portal : MonoBehaviour {
         Transform screenT = screen.transform;
         bool camFacingSameDirAsPortal = Vector3.Dot (transform.forward, transform.position - viewPoint) > 0;
         // TODO
-        screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
-        screenT.localPosition = Vector3.forward * screenThickness * ((camFacingSameDirAsPortal) ? 0.5f : -0.5f);
+        //screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
+        //screenT.localPosition = Vector3.forward * screenThickness * ((camFacingSameDirAsPortal) ? 0.5f : -0.5f);
         return screenThickness;
     }
 
@@ -360,7 +364,7 @@ public class Portal : MonoBehaviour {
 
         if (!secondary && otherWallType == SurfaceTypes.FLOOR && wallType == SurfaceTypes.FLOOR)
         {
-            this.gameObject.transform.Rotate(new Vector3(180, 0, 0), Space.World);
+            this.gameObject.transform.Rotate(new Vector3(0, 180, 180), Space.World);
         }
         if (!secondary && wallType == SurfaceTypes.FLOOR && wallType == SurfaceTypes.FLOOR)
         {
@@ -390,11 +394,44 @@ public class Portal : MonoBehaviour {
 
     }
 
-    public void adjustPosition()
+    public void adjustPosition(Vector3 target)
     {
+        Vector3[] verticies = new Vector3[4];
+        Matrix4x4 thisMatrix = transform.worldToLocalMatrix;
+        Quaternion storedRot = transform.rotation;
+        transform.rotation = Quaternion.identity;
+
+        Vector3 extents = frame.bounds.extents;
+        verticies[0] = thisMatrix.MultiplyPoint3x4(extents);
+        verticies[1] = thisMatrix.MultiplyPoint3x4(new Vector3(-extents.x, extents.y, extents.z));
+        verticies[2] = thisMatrix.MultiplyPoint3x4(new Vector3(-extents.x, -extents.y, extents.z));
+        verticies[3] = thisMatrix.MultiplyPoint3x4(new Vector3(extents.x, -extents.y, extents.z));
+
+        transform.rotation = storedRot;
+
+        for (int i = 0; i < 4 ; i++)
+        {
+            vertBeans[i].transform.position = verticies[i];
+            Debug.Log("Point " + (i+1) + ": " + verticies[i].normalized);
+            Ray ray = new Ray(verticies[i], transform.forward);
+            RaycastHit surface;
+            Material status = vertBeans[i].GetComponent<Renderer>().material;
+            if (Physics.Raycast(ray, out surface, 5))
+            {
+
+                status.color = Color.green;
+                Debug.DrawLine(target, surface.point);
+            }
+            else
+            {
+                status.color = Color.red;
+            }
+        }
+
+        //Ray ray1 = new Ray(transform.position + )
         //Create 4 forward raycsts at each corner of portal
         //If any of those raycasts hit an object which is not the surface the portal is partend to
-            //asjust poisiton towards the direction of most valid hits and check until valid
+        //asjust poisiton towards the direction of most valid hits and check until valid
         //If all raycasts are only hitting the parent object, that means the portal is not overlapping or on an edge, so it can be placed there
     }
 }

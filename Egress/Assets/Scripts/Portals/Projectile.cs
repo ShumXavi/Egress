@@ -40,15 +40,14 @@ public class Projectile : MonoBehaviour {
             portal.transform.position = transform.position - (c.gameObject.transform.forward * 0.1f);
             //portal.transform.position = transform.position;
 
-            portalObject.adjustPosition();
-
             SurfaceTypes wallType = c.gameObject.GetComponent<SurfaceType>().type;
             SurfaceTypes otherWallType = otherPortalObject.wall != null
                 ? otherPortalObject.wall.GetComponent<SurfaceType>().type
                 : SurfaceTypes.NONE;
-
             portalObject.SetRotation(type, wallType, otherWallType);
             otherPortalObject.SetRotation(!type, otherWallType, wallType);
+            //portalObject.adjustPosition(transform.position);
+
         } else if (c.gameObject.CompareTag("reflective")) {
             // add reflective force
             Rigidbody rb = GetComponent<Rigidbody>();
