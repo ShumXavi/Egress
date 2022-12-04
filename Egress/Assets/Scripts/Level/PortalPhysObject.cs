@@ -21,6 +21,22 @@ public class PortalPhysObject : PortalTraveller
         }
         
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    GameObject obj = collision.gameObject;
+    //    if (obj.CompareTag("movingPlatform"))
+    //    {
+    //        transform.SetParent(obj.transform, true);
+    //    }
+    //}
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    GameObject obj = collision.gameObject;
+    //    if (obj.CompareTag("movingPlatform"))
+    //    {
+    //        transform.SetParent(obj.transform, true);
+    //    }
+    //}
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {

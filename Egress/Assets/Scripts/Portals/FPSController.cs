@@ -33,6 +33,7 @@ public class FPSController : PortalTraveller {
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
 
+    private Vector3 targetVelocity;
     bool jumping;
     float lastGroundedTime;
     bool disabled;
@@ -83,7 +84,7 @@ public class FPSController : PortalTraveller {
         Vector3 worldInputDir = transform.TransformDirection (inputDir);
 
         float currentSpeed = (Input.GetKey (KeyCode.LeftShift)) ? runSpeed : walkSpeed;
-        Vector3 targetVelocity = worldInputDir * currentSpeed;
+        targetVelocity = worldInputDir * currentSpeed;
         if (warpVelocity.magnitude > 1)
         {
             velocity = warpVelocity;
@@ -163,22 +164,34 @@ public class FPSController : PortalTraveller {
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
 
     }
-    
 
     void OnTriggerEnter(Collider other)
     {
+        //Debug.Log("Hi");
         //Debug.Log("I am the player I found the trigger1");
         if (other.tag == "Kill")
         {
             isDead = true;
             Debug.Log("I am the player I found the trigger2");
         }
+
         if (other.tag == "Box")
         {
             CanPickup = true;
 
         }
     }
+    void OnTriggerExit(Collider other)
+    {
+        //Debug.Log("Bye");
+
+        //if (other.gameObject.CompareTag("movingPlatform"))
+        //{
+        //    Debug.Log("Grape");
+        //    transform.SetParent(null);
+        //}
+    }
+
 
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
         transform.position = pos;
