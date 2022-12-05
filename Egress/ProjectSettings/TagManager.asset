@@ -12,6 +12,7 @@ TagManager:
   - floor
   - Box
   - movingPlatform
+  - Button
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,10 @@ public class MainCamera : MonoBehaviour {
     [SerializeField]
     private float pickupForce = 150.0f;
 
+    public static bool CButtOn;
+    public static bool CmovButtOn;
+    public static bool GButtOn;
+
     void Awake () {
         portals = FindObjectsOfType<Portal> ();
     }
@@ -34,6 +38,22 @@ public class MainCamera : MonoBehaviour {
                     //pickup object
                     PickupObject(hit.transform.gameObject);
                 }
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange) && hit.transform.tag == "Button")
+                {
+                    if (hit.collider.name == "GButton")
+                    {
+                        GButtOn = true;
+                        Debug.Log("GButton is now " + GButtOn);
+                    }
+                    if (hit.collider.name == "CButton")
+                    {
+                        CButtOn = true;
+                        CmovButtOn = true;
+                        Debug.Log("CButton is now " + CButtOn);
+                        Debug.Log("CmovButton is now " + CmovButtOn);
+                    }
+                }
+                
             }
             else
             {
