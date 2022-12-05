@@ -384,7 +384,8 @@ public class Portal : MonoBehaviour {
         }
 
         if (!secondary && wallType == SurfaceTypes.WALL && otherWallType == SurfaceTypes.FLOOR) {
-            this.gameObject.transform.Rotate(new Vector3(0, 180, 0), Space.World);
+            this.gameObject.transform.Rotate(new Vector3(0, 180, 180), Space.World);
+            
         }
 
         if (!secondary && wallType == SurfaceTypes.WALL && otherWallType == SurfaceTypes.CEILING) {

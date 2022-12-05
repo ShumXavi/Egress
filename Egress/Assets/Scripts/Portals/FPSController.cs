@@ -204,8 +204,8 @@ public class FPSController : PortalTraveller {
         Debug.Log(fromPortal.rotation);
         warpVelocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity)) * warpMultiplier;
         Debug.Log(velocity);
-        velocity = warpVelocity;
         Debug.Log(warpVelocity);
+        velocity = warpVelocity;
         verticalVelocity = warpVelocity.y;
 
         Physics.SyncTransforms ();
