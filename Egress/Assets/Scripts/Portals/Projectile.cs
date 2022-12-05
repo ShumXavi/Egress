@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour {
             // add reflective force
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.AddForce(Vector3.Reflect(transform.position, c.gameObject.transform.forward), ForceMode.Impulse);
+            //rb.velocity /= rb.velocity.magnitude;
 
             // reset lifetime of object
             lifetime = defaultLifetime;
