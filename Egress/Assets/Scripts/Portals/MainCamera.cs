@@ -44,6 +44,10 @@ public class MainCamera : MonoBehaviour {
         {
             MoveObject();
         }
+        if (Input.GetKey(KeyCode.T))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) *20, Color.green);
+        }
     }
     void PickupObject(GameObject pickObj)
     {
