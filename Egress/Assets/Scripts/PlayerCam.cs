@@ -18,6 +18,7 @@ public class PlayerCam : MonoBehaviour
     private Rigidbody heldObjRB;
     //button bools
     public static bool CButtOn;
+    public static bool CmovButtOn;
     public static bool GButtOn;
 
     [Header("Physics Parameters")]
@@ -67,12 +68,15 @@ public class PlayerCam : MonoBehaviour
                     if(hit.collider.name == "GButton")
                     {
                         GButtOn = true;
-                        Debug.Log("Button is now " + GButtOn);
+                        Debug.Log("GButton is now " + GButtOn);
                     }
                     if (hit.collider.name == "CButton")
                     {
                         CButtOn = true;
-                        Debug.Log("Button is now " + CButtOn);
+                        CmovButtOn = true;
+                        Debug.Log("CButton is now " + CButtOn);
+                        Debug.Log("CmovButton is now " + CmovButtOn);
+
                     }
                     //hit.collider.gameObject.name
                     //hit.collider.name
