@@ -142,8 +142,6 @@ public class FPSController : PortalTraveller {
             }
         }
 
-       
-
         float mX = Input.GetAxisRaw ("Mouse X");
         float mY = Input.GetAxisRaw ("Mouse Y");
 

@@ -2396,6 +2396,7 @@ GameObject:
   - component: {fileID: 3439236183022463652}
   - component: {fileID: 3439236183022463658}
   - component: {fileID: 3439236183022463657}
+  - component: {fileID: 999591190815187506}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -2482,6 +2483,18 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   warpVelocity: {x: 0, y: 0, z: 0}
   CanPickup: 0
+--- !u!114 &999591190815187506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439236183022463656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe9c70b4d9fae941a388e93595f5f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3439236183034304436
 GameObject:
   m_ObjectHideFlags: 0
