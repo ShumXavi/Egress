@@ -53,8 +53,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4297093104134882096, guid: e460e80ef538131caa7cf1ca4dcd68fe, type: 3}
       propertyPath: m_Name
-      value: Yellow Shot
+      value: Yellow Shot Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5817722622692519885, guid: e460e80ef538131caa7cf1ca4dcd68fe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b2969d1fe69e654b922285f09996ea2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e460e80ef538131caa7cf1ca4dcd68fe, type: 3}
 --- !u!1 &3988226794293007383 stripped
@@ -75,3 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portal: {fileID: 0}
+  otherPortal: {fileID: 0}
+  type: 0
+  defaultLifetime: 5
