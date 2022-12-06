@@ -20,11 +20,18 @@ public class PrPlate : MonoBehaviour
     float prspeed = 0.25f;
     //speed of button movement
 
+    //SFX
+    
+    public AudioSource audio;
+    public static bool exitAudio;
+    public bool WasOn;
+
     void Start()
     {
         rend2 = GetComponent<Renderer>();
         rend2.enabled = true;
         rend2.sharedMaterial = p_material[0];
+        audio.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,13 +45,17 @@ public class PrPlate : MonoBehaviour
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Box")
         {
             IsOn = true;
+            //WasOn = true;
             rend2.sharedMaterial = p_material[1];
             //Debug.Log("I found the trigger2");
+            
             Debug.Log("Bool for PR " + IsOn);
 
 
             transform.position = Vector3.MoveTowards(transform.position, waypoints[1].transform.position, prspeed * Time.deltaTime);
             //movement from current position to waypoint position at var speed
+            audio.enabled = true;
+            exitAudio = false;
         }
 
 
@@ -54,8 +65,9 @@ public class PrPlate : MonoBehaviour
         IsOn = false;
         rend2.sharedMaterial = p_material[0];
         Debug.Log("Bool for PR " + IsOn);
-       
-
+        audio.enabled = false;
+        exitAudio = true;
+        Debug.Log("Bool for PRsfx " + exitAudio);
         transform.position = Vector3.MoveTowards(transform.position, waypoints[0].transform.position, prspeed * Time.deltaTime);
         //movement from current position to waypoint position at var speed
     }

@@ -4,11 +4,22 @@ using UnityEngine;
 
 //updated OnTriggerEnter method had needless bool in there
 
+/*how to add SFX:
+ * Drag and drop SFX onto an object making it audio source
+ * check play when awake and loop(normally)
+ * DISABLE the sound as prefab is enabled
+ * add a script with conditions to enable the sound
+ * drag audio source obj as audio source in this case footstepSound 
+ */
+
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
     Vector3 moveDirection;
+    //Movement SFX 
+    public AudioSource footstepSound;
+    public static bool MusicOn;
 
     Rigidbody rb;
 
@@ -45,6 +56,19 @@ public class PlayerMove : MonoBehaviour
 
         MyInput();//separates input vert and horiz for easier access
         MovePlayer();
+        FootstepSFX();
+        
+        
+        if (Input.GetKey(KeyCode.M) && !MusicOn)
+        {
+            MusicOn = true;
+            Debug.Log("MusicOn is now " + MusicOn);
+        }
+        if (Input.GetKey(KeyCode.N) && MusicOn)
+        {
+            MusicOn = false;
+            Debug.Log("MusicOn is now " + MusicOn);
+        }
         //ground check
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -82,5 +106,18 @@ public class PlayerMove : MonoBehaviour
         }
       
     }
+    private void FootstepSFX()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            footstepSound.enabled = true;
+            
+        }
+        else
+        {
+            footstepSound.enabled = false;
+        }
+    }
+   
 
 }

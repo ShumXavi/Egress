@@ -39,7 +39,7 @@ public class CubeButton : MonoBehaviour
                     hasMoved = true;
                 }
             }
-
+            //Debug.Log("CButton moving towards " + CurrentWaypoint);
             transform.position = Vector3.MoveTowards(transform.position, waypoints[CurrentWaypoint].transform.position, buttspeed * Time.deltaTime);
             //movement from current position to waypoint position at var speed
         }
