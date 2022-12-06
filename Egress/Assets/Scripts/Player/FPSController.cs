@@ -39,8 +39,6 @@ public class FPSController : PortalTraveller {
     bool disabled;
     //pickup vars
     public bool CanPickup = false;
-    //Death bool
-    public static bool isDead = false;
 
     float pollingTime = 1f;
     private float time;
@@ -169,7 +167,7 @@ public class FPSController : PortalTraveller {
         //Debug.Log("I am the player I found the trigger1");
         if (other.tag == "Kill")
         {
-            isDead = true;
+            //isDead = true;
             Debug.Log("I am the player I found the trigger2");
         }
 

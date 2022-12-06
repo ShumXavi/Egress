@@ -24,6 +24,9 @@ public class MainCamera : MonoBehaviour {
 
     void Awake () {
         portals = FindObjectsOfType<Portal> ();
+        CButtOn = false;
+        CmovButtOn = false;
+        GButtOn = false;
     }
     private void Update()
     {
