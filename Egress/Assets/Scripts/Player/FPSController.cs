@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class FPSController : PortalTraveller {
 
     public float walkSpeed = 3;
@@ -71,6 +71,10 @@ public class FPSController : PortalTraveller {
             Cursor.visible = true;
             disabled = !disabled;
         }
+        if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
         if (disabled) {
             return;
@@ -86,7 +90,7 @@ public class FPSController : PortalTraveller {
         if (warpVelocity.magnitude > 1)
         {
             velocity = warpVelocity;
-            warpVelocity = Vector3.SmoothDamp(warpVelocity, Vector3.zero, ref warpVelocity,smoothMoveTime);
+            warpVelocity = Vector3.SmoothDamp(warpVelocity, Vector3.zero, ref warpVelocity,warpVelocity.magnitude*smoothMoveTime);
   
             if (controller.isGrounded)
             {
@@ -108,7 +112,7 @@ public class FPSController : PortalTraveller {
         if (time >= pollingTime)
         {
             int frameRate = Mathf.RoundToInt(frameCount / time);
-            verticalVelocityCap = verticalVelocityCap % frameRate;
+            //verticalVelocityCap = verticalVelocityCap % frameRate;
         }
 
         if(Mathf.Abs(verticalVelocity) >= verticalVelocityCap)

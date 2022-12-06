@@ -82,7 +82,7 @@ public class MakeParent : MonoBehaviour
 			}
             else
             {
-				other.gameObject.transform.localScale = StoredScale;
+				//other.gameObject.transform.localScale = StoredScale;
 			}
 		}
 	}
