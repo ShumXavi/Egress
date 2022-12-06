@@ -17,20 +17,20 @@ public class CubeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerCam.CButtOn)
+        if (MainCamera.CButtOn)
         {
             if (!Spawned)
             {
                 //Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE has been pressed");
                 objSpawned = Instantiate(objTospawn, transform.position, transform.rotation);
                 Spawned = true;
-                PlayerCam.CButtOn = false;
+                MainCamera.CButtOn = false;
             }
             else
             {
                 Destroy(objSpawned);
                 objSpawned = Instantiate(objTospawn, transform.position, transform.rotation);
-                PlayerCam.CButtOn = false;
+                MainCamera.CButtOn = false;
             }
            
         }

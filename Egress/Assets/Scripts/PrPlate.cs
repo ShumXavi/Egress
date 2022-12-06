@@ -32,9 +32,8 @@ public class PrPlate : MonoBehaviour
     {
        
     }
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        //Debug.Log("I am the SOMETHING I found the trigger1");
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Box")
         {
             IsOn = true;
@@ -45,18 +44,25 @@ public class PrPlate : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, waypoints[1].transform.position, prspeed * Time.deltaTime);
             //movement from current position to waypoint position at var speed
+            if (GetComponent<Key>()){
+                GetComponent<Key>().open = true;
+            }
         }
 
 
     }
-    void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
         IsOn = false;
         rend2.sharedMaterial = p_material[0];
         Debug.Log("Bool for PR " + IsOn);
-       
+
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[0].transform.position, prspeed * Time.deltaTime);
         //movement from current position to waypoint position at var speed
+        if (GetComponent<Key>())
+        {
+            GetComponent<Key>().open = false;
+        }
     }
 }

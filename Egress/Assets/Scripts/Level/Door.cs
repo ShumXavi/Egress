@@ -9,17 +9,16 @@ public class Door : MonoBehaviour
     [SerializeField]
     float speed = .5f;
     public GameObject door;
-    public bool goal;
+    public GameObject key;
     // Start is called before the first frame update
     void Start()
     {
-        door = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (goal)
+        if (key.GetComponent<Key>().open)
         {
             OpenDoor();
         }

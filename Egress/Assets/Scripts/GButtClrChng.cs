@@ -17,7 +17,7 @@ public class GButtClrChng : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerCam.GButtOn)
+        if (MainCamera.GButtOn)
         {
             rend.sharedMaterial = m_material[1];
         }

@@ -13,6 +13,7 @@ TagManager:
   - Box
   - movingPlatform
   - Button
+  - Dummy
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Box
   - Pickup
   - Trigger
-  - 
+  - Button
   - 
   - 
   - 

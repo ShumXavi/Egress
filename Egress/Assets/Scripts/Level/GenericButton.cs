@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeButton : MonoBehaviour
+public class GenericButton : MonoBehaviour
 {
-    public Material[] c_material;
-    Renderer rend1;
     //this code is to have an object other than the player move between empty waypoint objects
     [SerializeField] GameObject[] waypoints;
     int CurrentWaypoint = 0;
@@ -13,21 +11,14 @@ public class CubeButton : MonoBehaviour
     [SerializeField]
     float buttspeed = 0.25f;
     //speed of button movement
-    public bool hasMoved = false;
+    public bool hasMoved;
+    // Start is called before the first frame update
 
-    void Start()
-    {
-        rend1 = GetComponent<Renderer>();
-        rend1.enabled = true;
-        rend1.sharedMaterial = c_material[0];
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        if (MainCamera.CmovButtOn && !hasMoved)
+        if (MainCamera.GButtOn && !hasMoved)
         {
-
-            rend1.sharedMaterial = c_material[1];
             if (Vector3.Distance(transform.position, waypoints[CurrentWaypoint].transform.position) < .01f)
             //this checks if object reaches target waypoint
             {
@@ -39,18 +30,9 @@ public class CubeButton : MonoBehaviour
                     hasMoved = true;
                 }
             }
-
             transform.position = Vector3.MoveTowards(transform.position, waypoints[CurrentWaypoint].transform.position, buttspeed * Time.deltaTime);
+            GetComponent<Key>().open = true;
             //movement from current position to waypoint position at var speed
         }
-        if (hasMoved)
-        {
-            hasMoved = false;
-            MainCamera.CmovButtOn = false;
-            rend1.sharedMaterial = c_material[0];
-        }
-        
-        
     }
-    
 }

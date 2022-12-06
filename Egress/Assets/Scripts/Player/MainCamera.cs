@@ -40,6 +40,7 @@ public class MainCamera : MonoBehaviour {
                 }
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange) && hit.transform.tag == "Button")
                 {
+                    Debug.Log("But");
                     if (hit.collider.name == "GButton")
                     {
                         GButtOn = true;

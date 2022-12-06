@@ -11,6 +11,7 @@ public class PortalPhysObject : PortalTraveller
 
     void Awake()
     {
+        graphicsObject = GameObject.FindGameObjectWithTag("Dummy");
         held = false;
         rb = GetComponent<Rigidbody>();
     }

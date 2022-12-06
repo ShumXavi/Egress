@@ -11,23 +11,47 @@ public class WaypointTraveler : MonoBehaviour
     [SerializeField]
     float platspeed = 1.0f;
     //speed of platform movement
-    
+    public GameObject key;
     
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, waypoints[CurrentWaypoint].transform.position) < .01f)
-            //this checks if object reaches target waypoint
+        if(!key)
         {
-            CurrentWaypoint++;
-            if (CurrentWaypoint >= waypoints.Length)
-                //if reached end of waypoint array loop back to first
+            if (Vector3.Distance(transform.position, waypoints[CurrentWaypoint].transform.position) < .01f)
+            //this checks if object reaches target waypoint
             {
-                CurrentWaypoint = 0;
+                CurrentWaypoint++;
+                if (CurrentWaypoint >= waypoints.Length)
+                //if reached end of waypoint array loop back to first
+                {
+                    CurrentWaypoint = 0;
+                }
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[CurrentWaypoint].transform.position, platspeed * Time.deltaTime);
+            //movement from current position to waypoint position at var speed
+        }
+        else
+        {
+            if (key.GetComponent<Key>().open)
+            {
+
+                if (Vector3.Distance(transform.position, waypoints[CurrentWaypoint].transform.position) < .01f)
+                //this checks if object reaches target waypoint
+                {
+                    CurrentWaypoint++;
+                    if (CurrentWaypoint >= waypoints.Length)
+                    //if reached end of waypoint array loop back to first
+                    {
+                        CurrentWaypoint = 0;
+                    }
+                }
+
+                transform.position = Vector3.MoveTowards(transform.position, waypoints[CurrentWaypoint].transform.position, platspeed * Time.deltaTime);
+                //movement from current position to waypoint position at var speed
             }
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[CurrentWaypoint].transform.position, platspeed * Time.deltaTime);
-        //movement from current position to waypoint position at var speed
     }
 }
