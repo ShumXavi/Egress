@@ -10,6 +10,9 @@ public class CubeButton : MonoBehaviour
     [SerializeField] GameObject[] waypoints;
     int CurrentWaypoint = 0;
 
+    public AudioSource sound;
+    public bool hasPlayed;
+
     [SerializeField]
     float buttspeed = 0.25f;
     //speed of button movement
@@ -17,15 +20,22 @@ public class CubeButton : MonoBehaviour
 
     void Start()
     {
+        sound = GetComponent<AudioSource>();
         rend1 = GetComponent<Renderer>();
         rend1.enabled = true;
         rend1.sharedMaterial = c_material[0];
+        sound.enabled = false;
     }
 
     void Update()
     {
         if (MainCamera.CmovButtOn && !hasMoved)
         {
+            if (!hasPlayed)
+            {
+                sound.enabled = true;
+                hasPlayed = true;
+            }
 
             rend1.sharedMaterial = c_material[1];
             if (Vector3.Distance(transform.position, waypoints[CurrentWaypoint].transform.position) < .01f)
@@ -46,8 +56,10 @@ public class CubeButton : MonoBehaviour
         if (hasMoved)
         {
             hasMoved = false;
+            hasPlayed = false;
             MainCamera.CmovButtOn = false;
             rend1.sharedMaterial = c_material[0];
+            sound.enabled = false;
         }
         
         
