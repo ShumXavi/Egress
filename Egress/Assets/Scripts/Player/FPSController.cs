@@ -1,4 +1,8 @@
-﻿using System.Collections;
+// Modified from Portals by Sebastian Lague (MIT License) 
+// https://github.com/SebLague/Portals
+// original file: Portals/blob/master/Assets/Scripts/Demo/FPSController.cs
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
