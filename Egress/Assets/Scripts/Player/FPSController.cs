@@ -139,6 +139,10 @@ public class FPSController : PortalTraveller {
                 verticalVelocity = jumpForce;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
         float mX = Input.GetAxisRaw ("Mouse X");
         float mY = Input.GetAxisRaw ("Mouse Y");
